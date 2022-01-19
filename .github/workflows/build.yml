@@ -45,7 +45,7 @@ jobs:
       - name: Show changes
         run: echo "${{ steps.gitChanges.outputs }}"
       - name: "Rebase if this PR is behind master branch"
-        if: steps.gitChanges.outputs != "0"
+        if: ${{ steps.gitChanges.outputs != "0" }}
         run: git rebase master
       - name: "Continue."
         run: echo "Everything is now up-to-date."
