@@ -38,5 +38,4 @@ jobs:
         run: echo "$EVENT_NAME $REPOSITORY $PR_HEAD_LABEL $IS_PR $IS_FORK"
       - name: Detect and apply changes from master branch
         id: detect
-        run: 
         run: scripts/detect-changes.sh
