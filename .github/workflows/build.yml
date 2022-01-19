@@ -1,0 +1,38 @@
+name: Build and test
+on:
+  # Build PRs 
+  pull_request: ~
+  # On push event
+  push:
+    # Build only changes pushed into the `master` branch.
+    branches:
+      - master
+      - pipeline
+    # Ignore documentation changes (Netlify will handle this)
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '**/*.md'
+
+# Currently you cannot use ${{ env.IS_FORK }} for some reason, which is why you might need to copy-paste some of these.
+env:
+  REPOSITORY: ${{ github.repository }}
+  IS_FORK: ${{ github.repository != 'carlspring/s3fs-nio' }}
+  IS_PR: ${{ github.event_name == 'pull_request' }}
+  EVENT_NAME: ${{ toJSON(github.event_name) }}
+  # format: username:branch
+  PR_HEAD_LABEL: ${{ toJSON(github.event.pull_request.head.label) }}
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  build-matrix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Show GitHub context
+        run: echo "$EVENT_NAME $REPOSITORY $PR_HEAD_LABEL $IS_PR $IS_FORK"
