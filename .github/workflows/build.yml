@@ -41,12 +41,12 @@ jobs:
       - name: Fetch differences with master branch
         id: gitChanges
         run: |
-          git rev-list --left-only --count master...$(git branch --show-current)
+          git rev-list --left-only --count origin/master...$(git branch --show-current)
       - name: Show changes
         run: echo "${{ steps.gitChanges.outputs }}"
       - name: "Rebase if this PR is behind master branch"
         if: ${{ steps.gitChanges.outputs != 0 }}
-        run: git rebase master
+        run: git rebase origin/master
       - name: "Continue."
         run: echo "Everything is now up-to-date."
 
