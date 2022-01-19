@@ -34,8 +34,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: "Fetch master"
-        run: git fetch
+        run: git fetch --update-head-ok
       - name: Show GitHub context
         run: echo "$EVENT_NAME $REPOSITORY $PR_HEAD_LABEL $IS_PR $IS_FORK"
       - name: Fetch differences with master branch
