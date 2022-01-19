@@ -25,7 +25,7 @@ env:
   PR_NUMBER: ${{ github.event.number }}
 
 jobs:
-  build-matrix:
+  checkout-and-apply-changes:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -36,3 +36,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Show GitHub context
         run: echo "$EVENT_NAME $REPOSITORY $PR_HEAD_LABEL $IS_PR $IS_FORK"
+      - name: Detect and apply changes from master branch
+        id: detect
+        run: 
+        run: scripts/detect-changes.sh
