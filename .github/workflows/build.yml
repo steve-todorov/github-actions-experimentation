@@ -34,8 +34,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Show GitHub context
         run: echo "$EVENT_NAME $REPOSITORY $PR_HEAD_LABEL $IS_PR $IS_FORK"
-      - name: Detect and apply changes from master branch
-        id: detect
-        run: scripts/detect-changes.sh
+      - name: Fetch differences with master branch
+        id: gitChanges
+        run: |
+          git rev-list --left-only --count master...$(git branch --show-current)
+      - name: Show changes
+        run: echo "${{ steps.random-color-generator.outputs }}"
+      - name: "Rebase if this PR is behind master branch"
+        if: gitChanges != "0"
+        run: git rebase master
+      - name: "Continue."
+        run: echo "Hello world - I'm up-to-date."
