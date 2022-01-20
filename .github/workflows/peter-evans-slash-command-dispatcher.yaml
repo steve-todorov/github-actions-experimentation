@@ -16,11 +16,11 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commands: rebase
-          permission: write
-          issue-type: pull-request
-          #include-labels: |
-          #  rebase
-          #exclude-labels: |
-          #  no-rebase
-          #  dependencies          
+          config: >
+            [
+              {
+                "command": "rebase",
+                "permission": "admin",
+                "issue_type": "pull-request"
+              }
+            ]
