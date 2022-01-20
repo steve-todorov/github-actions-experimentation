@@ -17,10 +17,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commands: rebase-peter-evans
-          include-labels: |
-            rebase
-          exclude-labels: |
-            no-rebase
-            dependencies          
           permission: write
           issue-type: pull-request
+          #include-labels: |
+          #  rebase
+          #exclude-labels: |
+          #  no-rebase
+          #  dependencies          
