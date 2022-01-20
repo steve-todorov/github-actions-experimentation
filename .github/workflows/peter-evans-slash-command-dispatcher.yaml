@@ -5,8 +5,8 @@ on:
   issue_comment:
     types: [created]
   # dispatch rebase event when label matches
-  label:
-    types: [created]
+  #label:
+  #  types: [created]
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
