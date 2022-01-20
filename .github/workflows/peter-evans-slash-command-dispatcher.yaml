@@ -10,6 +10,6 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
-          commands: rebase
+          commands: rebase-peter-evans
           permission: write
           issue-type: pull-request
