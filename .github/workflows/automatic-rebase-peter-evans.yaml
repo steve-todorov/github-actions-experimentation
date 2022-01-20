@@ -1,7 +1,7 @@
 name: Automatic Rebase Peter Evans
 on:
   repository_dispatch:
-    types: [rebase-command]
+    types: [rebase-peter-evans-command]
 jobs:
   rebase:
     runs-on: ubuntu-latest
