@@ -13,7 +13,7 @@ jobs:
     #if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
     steps:
       - name: Slash Command Dispatch
-        uses: peter-evans/slash-command-dispatch@v1
+        uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commands: rebase
