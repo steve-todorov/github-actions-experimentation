@@ -1,4 +1,4 @@
-name: rebase-command
+name: Automatic Rebase Peter Evans
 on:
   repository_dispatch:
     types: [rebase-command]
