@@ -2,9 +2,24 @@ name: Slash Command Dispatch
 on:
   issue_comment:
     types: [created]
+  label:
+    types: [created]
 jobs:
-  slashCommandDispatch:
+  dispatch-rebase-on-comment:
     runs-on: ubuntu-latest
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          commands: rebase-peter-evans
+          permission: write
+          issue-type: pull-request
+
+  dispatch-rebase-on-label:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'rebase') or contains(github.event.pull_request.labels.*.name, 'needs-rebase') 
     steps:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v2
