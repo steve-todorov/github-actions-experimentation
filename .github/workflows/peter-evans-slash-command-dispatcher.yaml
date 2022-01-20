@@ -2,8 +2,9 @@ name: Slash Command Dispatch
 on:
   issue_comment:
     types: [created]
-  pull_request:
-    types: [labeled]
+  ## not supported? (fails with Error: Required context properties are missing)
+  #pull_request:
+  #  types: [labeled]
 jobs:
   dispatch-rebase-on-comment:
     runs-on: ubuntu-latest
@@ -17,14 +18,15 @@ jobs:
           permission: write
           issue-type: pull-request
 
-  dispatch-rebase-on-label:
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, '/rebase-peter-evans') || contains(github.event.pull_request.labels.*.name, 'rebase') || contains(github.event.pull_request.labels.*.name, 'needs-rebase') 
-    steps:
-      - name: Slash Command Dispatch
-        uses: peter-evans/slash-command-dispatch@v2
-        with:
-          token: ${{ secrets.PAT }}
-          commands: rebase-peter-evans
-          permission: write
-          issue-type: pull-request
+## This doesn't seem to be supported due to the different payload which is received.
+#  dispatch-rebase-on-label:
+#    runs-on: ubuntu-latest
+#    if: contains(github.event.pull_request.labels.*.name, '/rebase-peter-evans') || contains(github.event.pull_request.labels.*.name, 'rebase') || contains(github.event.pull_request.labels.*.name, 'needs-rebase') 
+#    steps:
+#      - name: Slash Command Dispatch
+#        uses: peter-evans/slash-command-dispatch@v2
+#        with:
+#          token: ${{ secrets.PAT }}
+#          commands: rebase-peter-evans
+#          permission: write
+#          issue-type: pull-request
