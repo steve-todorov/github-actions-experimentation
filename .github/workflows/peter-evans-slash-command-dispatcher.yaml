@@ -17,7 +17,7 @@ jobs:
 
   dispatch-rebase-on-label:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'rebase') || contains(github.event.pull_request.labels.*.name, 'needs-rebase') 
+    if: contains(github.event.pull_request.labels.*.name, '/rebase-peter-evans') || contains(github.event.pull_request.labels.*.name, 'rebase') || contains(github.event.pull_request.labels.*.name, 'needs-rebase') 
     steps:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v2
