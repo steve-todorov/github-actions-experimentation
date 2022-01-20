@@ -1,4 +1,4 @@
-name: Automatic Rebase
+name: Automatic Rebase Cirrus
 on:
   issue_comment:
     types: [created]
