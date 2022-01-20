@@ -1,0 +1,25 @@
+# This will dispatch the rebase events.
+name: Slash Command Dispatch
+on:
+  # dispatch rebase event when issue comment matches command.
+  issue_comment:
+    types: [created]
+  # dispatch rebase event when label matches
+  label:
+    types: [created]
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          commands: rebase
+          include-labels: |
+            rebase
+          exclude-labels: |
+            no-rebase
+            dependencies          
+          permission: write
+          issue-type: pull-request
