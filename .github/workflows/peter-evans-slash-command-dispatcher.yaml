@@ -1,26 +1,15 @@
-# This will dispatch the rebase events.
 name: Slash Command Dispatch
 on:
-  # dispatch rebase event when issue comment matches command.
   issue_comment:
-    types: [created]
-  # dispatch rebase event when label matches
-  label:
     types: [created]
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
-    #if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
     steps:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          config: >
-            [
-              {
-                "command": "rebase",
-                "permission": "admin",
-                "issue_type": "pull-request"
-              }
-            ]
+          token: ${{ secrets.PAT }}
+          commands: rebase
+          permission: write
+          issue-type: pull-request
