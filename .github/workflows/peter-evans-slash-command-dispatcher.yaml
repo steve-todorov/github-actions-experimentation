@@ -1,9 +1,7 @@
 name: Slash Command Dispatch
 on:
   issue_comment:
-    types: [created]
-  label:
-    types: [created]
+    types: [created, labeled]
 jobs:
   dispatch-rebase-on-comment:
     runs-on: ubuntu-latest
