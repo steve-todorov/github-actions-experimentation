@@ -43,7 +43,7 @@ jobs:
       - name: Fetch differences with master branch
         id: gitChanges
         run: |
-           git diff --name-only HEAD origin/master -- | sort -u | wc -l
+           git diff --name-only HEAD origin/master -- | sort -u
 #          git rev-list --left-only --count origin/master...$(git branch --show-current)
       - name: Show changes
         run: echo "${{ steps.gitChanges.outputs }}"
