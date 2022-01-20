@@ -1,3 +1,4 @@
+name: auto-rebase
 on:
     # Run on every push on every branch
     push:
