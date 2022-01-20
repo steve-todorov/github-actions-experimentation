@@ -5,17 +5,18 @@ on:
   issue_comment:
     types: [created]
   # dispatch rebase event when label matches
-  #label:
-  #  types: [created]
+  label:
+    types: [created]
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
     steps:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commands: rebase
+          commands: rebase-peter-evans
           include-labels: |
             rebase
           exclude-labels: |
