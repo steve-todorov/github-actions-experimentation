@@ -1,4 +1,4 @@
-name: Slash Command Dispatch
+name: slash-command-dispatch
 on:
   issue_comment:
     types: [created]
@@ -9,7 +9,7 @@ jobs:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v1
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commands: rebase
           permission: write
           issue-type: pull-request
