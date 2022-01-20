@@ -10,13 +10,13 @@ on:
 jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
+    #if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase-peter-evans')
     steps:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commands: rebase-peter-evans
+          commands: rebase
           permission: write
           issue-type: pull-request
           #include-labels: |
