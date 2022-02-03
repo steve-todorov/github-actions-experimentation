@@ -13,3 +13,4 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commands: detect-changes
+          issue-type: both
