@@ -1,0 +1,9 @@
+name: detect-changes
+on:
+  repository_dispatch:
+    types: [detect-changes-command]
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello world"
